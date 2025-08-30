@@ -192,7 +192,7 @@ func makePool(input chan paramCheck, fn workerFunc) chan paramCheck {
 	var wg sync.WaitGroup
 
 	output := make(chan paramCheck)
-	for i := 0; i < 65; i++ {
+	for i := 0; i < 70; i++ {
 		wg.Add(1)
 		go func() {
 			for c := range input {
