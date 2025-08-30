@@ -74,7 +74,7 @@ func main() {
 
 	done := makePool(charChecks, func(c paramCheck, output chan paramCheck) {
 		output_of_url := []string{c.url, c.param}
-		for _, char := range []string{"\"", "'", "<", ">", "$", "|", "(", ")", "`", ":", ";", "{", "}"} {
+		for _, char := range []string{"\"", "'", "<", ">"} {
 			wasReflected, err := checkAppend(c.url, c.param, "aprefix"+char+"asuffix")
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "error from checkAppend for url %s with param %s with %s: %s", c.url, c.param, char, err)
@@ -192,7 +192,7 @@ func makePool(input chan paramCheck, fn workerFunc) chan paramCheck {
 	var wg sync.WaitGroup
 
 	output := make(chan paramCheck)
-	for i := 0; i < 40; i++ {
+	for i := 0; i < 65; i++ {
 		wg.Add(1)
 		go func() {
 			for c := range input {
